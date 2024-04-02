@@ -1,0 +1,2795 @@
+{
+	"info": {
+		"_postman_id": "c4885076-daa7-4806-b652-703320d465a5",
+		"name": "DEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31812363",
+		"_collection_link": "https://basis-ltd.postman.co/workspace/Data-Collection~d856ae24-9a6c-46fc-9124-59d09bbe224d/collection/31812363-c4885076-daa7-4806-b652-703320d465a5?action=share&source=collection_link&creator=31812363"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"access_token\", pm.response.json().data.token);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gatesiuwasekevine@gmail.com\",\r\n    \"password\": \"OL3h0qtS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "# Endpoint\n\n`POST http://localhost:8080/api/v1/auth/login`\n\nThis endpoint is used for user authentication.\n\n**Request Body**\n\n- `email` (String, Required): The email address of the user.\n    \n- `password` (String, Required): The password of the user.\n    \n\n**Response**\n\n- **Status:** 200\n    \n- **Content-Type:** application/json\n    \n\nThe response does not include any specific data."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Institution Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"Admin \",\r\n    \"lastName\": \"institution\",\r\n    \"email\" : \"gatesiuwasekevine@gmail.com\",\r\n    \"phone\": \"0780088172\",\r\n    \"image_url\": \"https://res.cloudinary.com/dubi7e8kf/image/upload/v1708117738/cld-sample.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/register?institution_id=ee739bac-ea8f-4f32-a7ad-def6afc315ba",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "institution_id",
+									"value": "ee739bac-ea8f-4f32-a7ad-def6afc315ba"
+								}
+							]
+						},
+						"description": "# Endpoint: Register New User\n\n## URL\n\n`http://localhost:8080/api/v1/auth/register?institution_id=:institution_id`\n\n## Method\n\n`POST`\n\n## Description\n\nThis HTTP POST request is used to register a new user with the specified institution ID. The request should be made to `http://localhost:8080/api/v1/auth/register` with the `institution_id` query parameter included in the URL. The request body should be in raw format and include parameters such as firstName, lastName, email, phone, and image_url.\n\n## Query Parameters\n\n- `institution_id` (Query Parameter): The unique identifier of the institution.\n    \n\n## Request Body\n\n- **firstName** (Text, Required): The first name of the user.\n- **lastName** (Text, Required): The last name of the user.\n- **email** (Text, Required): The email address of the user.\n- **phone** (Text, Required): The phone number of the user.\n- **image_url** (Text, Required): The URL of the user's image.\n    \n\n## Response\n\n- **Status Code:** `201 Created`\n- **Content Type:** `application/json`\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"firstName\": \"*****\",\n    \"lastName\": \"*****\",\n    \"image_url\": \"*****\",\n    \"email\": \"*****\",\n    \"phone\": \"*****\",\n    \"institution_id\": \"*****\",\n    \"role\": \"*****\",\n    \"otp\": null,\n    \"deletedAt\": null,\n    \"id\": \"*****\",\n    \"isActive\": true,\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a POST method.\n- The `institution_id` query parameter is mandatory in the URL.\n- The request body should include the user's first name, last name, email, phone, and image URL.\n- The response has a status code of 201, indicating a successful user registration.\n- The Content-Type is set to `application/json`.\n- The `success` flag indicates the success of the registration.\n- The response body includes the registered user's details, such as first name, last name, image URL, email, phone, institution ID, role, OTP, deletion status, user ID, activity status, creation timestamp, and update timestamp."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Super Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"Nishimwe\",\r\n    \"lastName\": \"Prince\",\r\n    \"email\" : \"prince@libraryaidafricaoo.org\",\r\n    \"phone\": \"+25012345678945\",\r\n    \"image_url\": \"https://media.istockphoto.com/id/488529556/photo/love-is-in-the-air.webp?b=1&s=170667a&w=0&k=20&c=0HEDDwXnWo2DziShrbg4m9f0wBbd_56ymb-oDeNHN_s=\",\r\n    \"role\": \"super_admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "\n# Register User\n\nThis endpoint allows the client to register a new user.\n\n## Request Body\n- `firstName` (string): The first name of the user.\n- `lastName` (string): The last name of the user.\n- `email` (string): The email address of the user.\n- `phone` (string): The phone number of the user.\n- `image_url` (string): The URL of the user's image.\n- `role` (string): The role of the user.\n\n## Response\n- Status: 201 Created\n- Content-Type: application/json\n- `success` (boolean): Indicates if the request was successful.\n- `data` (object): Contains the user's information.\n  - `firstName` (string): The first name of the user.\n  - `lastName` (string): The last name of the user.\n  - `image_url` (string): The URL of the user's image.\n  - `email` (string): The email address of the user.\n  - `phone` (string): The phone number of the user.\n  - `institution_id` (string): The ID of the user's institution.\n  - `role` (string): The role of the user.\n  - `otp` (string): The one-time password for verification.\n  - `deletedAt` (string): Timestamp of when the user was deleted.\n  - `id` (string): The ID of the user.\n  - `isActive` (boolean): Indicates if the user is active.\n  - `createdAt` (string): Timestamp of when the user was created.\n  - `updatedAt` (string): Timestamp of when the user was last updated.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"Elysee\",\r\n    \"lastName\": \"Nishimwe\",\r\n    \"phone\": \"0788478653\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8992f723-d4d8-44ff-bddc-cbe203d0417a"
+								}
+							]
+						},
+						"description": "# Endpoint: Update User Authentication Information\n\n## URL\n\n`http://localhost:8080/api/v1/auth/:id`\n\n## Method\n\nPATCH\n\n## Description\n\nThis endpoint is used to update the user's authentication information by sending an HTTP PATCH request to `http://localhost:8080/api/v1/auth/:id`. The request should include a raw JSON payload with the keys \"firstName\", \"lastName\", and \"phone\" to update the user's first name, last name, and phone number.\n\n## Request Body\n\n- **firstName** (String, Optional): The updated first name of the user.\n    \n- **lastName** (String, Optional): The updated last name of the user.\n    \n- **phone** (String, Optional): The updated phone number of the user.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"*****\",\n    \"firstName\": \"*****\",\n    \"lastName\": \"*****\",\n    \"email\": \"*****\",\n    \"image_url\": null,\n    \"institution_id\": \"*****\",\n    \"phone\": \"*****\",\n    \"isActive\": true,\n    \"role\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": null,\n    \"otp\": \"*****\",\n    \"institution\": {\n      \"id\": \"*****\",\n      \"name\": \"*****\",\n      \"logo\": \"*****\"\n    }\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PATCH method.\n    \n- The endpoint URL should include the user's ID (`:id`).\n    \n- The request body should include a raw JSON payload with optional keys \"firstName\", \"lastName\", and \"phone\" to update the user's information.\n    \n- The response has a status code of 200, indicating a successful update.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success of the update.\n    \n- The response body includes the updated user information, such as ID, first name, last name, email, image URL, institution ID, phone, activity status, role, creation and update timestamps, deletion timestamp, and institution details."
+					},
+					"response": []
+				},
+				{
+					"name": "List All Admins",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/admins/?take=5&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"admins",
+								""
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Administrators\n\n## URL\n\n`http://localhost:8080/api/v1/auth/admins/`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint makes an HTTP GET request to retrieve a list of administrators. The request should be made to `http://localhost:8080/api/v1/auth/admins/` with query parameters 'take' to specify the number of records to retrieve and 'skip' to specify the number of records to skip.\n\n## Request Parameters\n\n- **take** (Query Parameter): The number of records to retrieve.\n    \n- **skip** (Query Parameter): The number of records to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"firstName\": \"*****\",\n        \"lastName\": \"*****\",\n        \"image_url\": \"*****\",\n        \"otp\": \"*****\",\n        \"email\": \"*****\",\n        \"phone\": \"*****\",\n        \"institution_id\": \"*****\",\n        \"isActive\": true,\n        \"role\": \"*****\",\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"institution\": {\n          \"id\": \"*****\",\n          \"name\": \"*****\",\n          \"email\": \"*****\",\n          \"logo\": \"*****\",\n          \"address\": \"*****\",\n          \"categoryId\": \"*****\",\n          \"categoryName\": \"*****\",\n          \"isActive\": true,\n          \"phone\": \"*****\",\n          \"createdAt\": \"*****\",\n          \"updatedAt\": \"*****\"\n        }\n      },\n      // ... more administrators\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/auth/admins/`.\n    \n- The query parameters 'take' and 'skip' are optional, allowing pagination of results.\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag, a \"data\" object with an array of \"rows\" representing the administrators, \"totalCount\", \"totalPages\", and \"currentPage\".\n    \n- Each administrator object in the \"rows\" array contains information about the administrator, such as their ID, first name, last name, image URL, OTP, email, phone, institution ID, activity status, role, creation and update timestamps, and institution details.\n    \n- The \"institution\" object within each administrator object provides information about the associated institution, including its ID, name, email, logo, address, category ID, category name, activity status, phone, creation and update timestamps."
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princeelysee@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/user/forgot-password",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"forgot-password"
+							]
+						},
+						"description": "# Endpoint: Forgot Password Update\n\n## URL\n\n`http://localhost:8080/api/v1/auth/user/forgot-password`\n\n## Method\n\nPATCH\n\n## Description\n\nThis endpoint is used to update the password for a user who has forgotten their password.\n\n## Request\n\n- **Request URL:** `http://localhost:8080/api/v1/auth/user/forgot-password`\n    \n- **Request Body:**\n    \n    - **email** (String, Required): The email address of the user who has forgotten the password.\n        \n\n## Response\n\n- **Success (Boolean):** Indicates whether the password update was successful.\n    \n- **Message (Object):** Contains details of the user's profile, including their ID, name, email, phone, role, and other information.\n    \n\n### Example Response\n\n``` json\n{\n  \"success\": true,\n  \"message\": {\n    \"id\": \"*****\",\n    \"firstName\": \"*****\",\n    \"lastName\": \"*****\",\n    \"email\": \"*****\",\n    \"image_url\": null,\n    \"institution_id\": \"*****\",\n    \"phone\": \"*****\",\n    \"isActive\": true,\n    \"role\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": null,\n    \"otp\": \"*****\",\n    \"institution\": {\n      \"id\": \"*****\",\n      \"name\": \"*****\",\n      \"logo\": \"*****\"\n    },\n    \"password\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PATCH method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/auth/user/forgot-password`.\n    \n- The request body should include the user's email address.\n    \n- The response includes a \"success\" flag indicating whether the password update was successful.\n    \n- The \"message\" object contains details of the user's profile, including their ID, name, email, phone, role, and other information.\n    \n- The actual values for user properties are masked for privacy reasons."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princeelysee@gmail.com\",\r\n    \"otp\": 122527\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/user/forgot-password/verify-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"forgot-password",
+								"verify-otp"
+							]
+						},
+						"description": "# Endpoint: Verify OTP for Forgot Password\n\n## URL\n\n`http://localhost:8080/api/v1/auth/user/verify-forgot-password-otp`\n\n## Method\n\nPOST\n\n## Description\n\nThis endpoint is used to verify the OTP (One Time Password) sent to the user's email for the forgot password process.\n\n## Request Body\n\n- **email** (String, Required): The email address of the user.\n- **otp** (Number, Required): The OTP received by the user.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"verified\": true\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a POST method.\n- The endpoint URL should be `http://localhost:8080/api/v1/auth/user/verify-forgot-password-otp`.\n- The request body should include the user's email address and the OTP received.\n- The response includes a \"success\" flag indicating if the request was successful.\n- The \"data\" object includes a \"verified\" flag indicating if the OTP was successfully verified."
+					},
+					"response": []
+				},
+				{
+					"name": "Set New Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"princeelysee@gmail.com\",\r\n    \"otp\": 122527,\r\n    \"newPassword\": \"z7ZhkLpgnZCm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/user/forgot-password/new-password",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"forgot-password",
+								"new-password"
+							]
+						},
+						"description": "# Endpoint: Patch User Forgot Password New Password\n\n## URL\n\n`http://localhost:8080/api/v1/auth/user/patch-forgot-password`\n\n## Method\n\nPATCH\n\n## Description\n\nThis endpoint is used to update the password for a user who has forgotten their password. It requires the user's email, OTP (One Time Password), and the new password.\n\n## Request Body\n\n- **email** (String, Required): The email address of the user.\n    \n- **otp** (Number, Required): The One Time Password received by the user.\n    \n- **newPassword** (String, Required): The new password to be set.\n    \n\n## Response\n\n- **Success (Boolean):** Indicates if the operation was successful.\n    \n- **Message (Object):** Contains user information including ID, first name, last name, email, image URL, institution details, etc.\n    \n\n### Example Response\n\n``` json\n{\n  \"success\": true,\n  \"message\": {\n    \"id\": \"*****\",\n    \"firstName\": \"*****\",\n    \"lastName\": \"*****\",\n    \"email\": \"*****\",\n    \"image_url\": null,\n    \"institution_id\": \"*****\",\n    \"phone\": \"*****\",\n    \"isActive\": true,\n    \"role\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": null,\n    \"otp\": \"*****\",\n    \"institution\": {\n      \"id\": \"*****\",\n      \"name\": \"*****\",\n      \"logo\": \"*****\"\n    },\n    \"password\": null\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PATCH method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/auth/user/patch-forgot-password`.\n    \n- The request body should include the user's email address, OTP, and the new password.\n    \n- The response includes a \"success\" flag indicating if the operation was successful.\n    \n- The \"message\" object contains user information, including ID, first name, last name, email, image URL, institution details, etc.\n    \n- The actual values for user properties are masked for privacy reasons."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Media & Personality\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/categories/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								""
+							]
+						},
+						"description": "### Add Category\n\nThis endpoint allows you to create a new category.\n\n#### Request Body\n\n- name (string, required): The name of the category.\n    \n\n#### Response\n\n- 201 Created: The category was successfully created.\n    - success (boolean): Indicates if the request was successful.\n    - data (object): Information about the created category.\n        - name (string): The name of the category.\n        - deletedAt (string): Date and time when the category was deleted, if applicable.\n        - id (string): The unique identifier of the category.\n        - isActive (boolean): Indicates if the category is active.\n        - createdAt (string): Date and time when the category was created.\n        - updatedAt (string): Date and time when the category was last updated."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Media\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/categories/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f932ef38-00b1-48f0-adee-30e397082767"
+								}
+							]
+						},
+						"description": "# Endpoint: Update Category by ID\n\n## URL\n\n`http://localhost:8080/api/v1/categories/:id`\n\n## Method\n\nPATCH\n\n## Description\n\nThis endpoint allows you to update a specific category by ID.\n\n## Request\n\n- **Method:** PUT\n- **Endpoint:** `http://localhost:8080/api/v1/categories/:id`\n- **Headers:**\n    - **Content-Type:** application/json\n- {\"name\": \"\\*\"}\n    \n\n## Response\n\n- **Status Code:** 200 OK\n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"*****\",\n    \"name\": \"*****\",\n    \"isActive\": true,\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": null\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PUT method.\n- The endpoint URL should include the category ID (`:id`).\n- The request headers should include \"Content-Type: application/json\".\n- The request body should be in raw JSON format with the \"name\" key representing the updated category name.\n- The response has a status code of 200, indicating a successful update.\n- The Content-Type is set to application/json.\n- The success flag indicates the success of the update.\n- The response body includes a \"data\" object with information about the updated category, including id, name, isActive (indicates if the category is active), createdAt (date and time when the category was created), updatedAt (date and time when the category was last updated), and deletedAt (date and time when the category was deleted, if applicable)."
+					},
+					"response": []
+				},
+				{
+					"name": "List Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/categories/?take=10&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								""
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "10"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Categories\n\n## URL\n\n`http://localhost:8080/api/v1/categories/`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint makes an HTTP GET request to retrieve a list of categories. The request should include query parameters \"take\" to specify the number of items to retrieve, and \"skip\" to specify the number of items to skip.\n\n## Request Parameters\n\n- **take** (Number): The number of items to retrieve.\n    \n- **skip** (Number): The number of items to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"name\": \"*****\",\n        \"isActive\": true,\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": null\n      },\n      // ... more category objects\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/categories/`.\n    \n- The request may include query parameters \"take\" and \"skip\" to control the number of items to retrieve and skip.\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The \"success\" flag indicates the success of the request.\n    \n- The \"data\" object includes an array of category objects (\"rows\"), each containing \"id\", \"name\", \"isActive\" (indicates if the category is active), \"createdAt\" (date and time when the category was created), \"updatedAt\" (date and time when the category was last updated), and \"deletedAt\" (date and time when the category was deleted, if applicable) properties.\n    \n- Additionally, the \"data\" object includes \"totalCount\" (total count of categories), \"totalPages\" (total number of pages), and \"currentPage\" (current page number)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/categories/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f932ef38-00b1-48f0-adee-30e397082767"
+								}
+							]
+						},
+						"description": "# Endpoint: Delete Category by ID\n\n## URL\n\n`http://localhost:8080/api/v1/categories/:id`\n\n## Method\n\nDELETE\n\n## Description\n\nThis endpoint is used to delete a specific category by its ID.\n\n## Request\n\n- **Method:** DELETE\n    \n- **URL:** `http://localhost:8080/api/v1/categories/:id`\n    \n\n## Response\n\n- **Status Code:** 204 No Content\n    \n- **Content Type:** text/xml\n    \n- **Body:** null\n    \n\n## Notes\n\n- The request should be a DELETE method.\n    \n- The endpoint URL should include the category ID (`:id`).\n    \n- The response has a status code of 204, indicating a successful deletion.\n    \n- The Content-Type is set to text/xml.\n    \n- The response body is null, as indicated by the \"Body: null\"."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Mobile project\",\r\n    \"description\": \"test mobile form\",\r\n    \"start_date\": \"\",\r\n    \"end_date\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								""
+							]
+						},
+						"description": "# Endpoint: Add Project\n\n## URL\n\n`http://localhost:8080/api/v1/projects/`\n\n## Method\n\nPOST\n\n## Description\n\nThis endpoint allows you to create a new project.\n\n## Request Body\n\n- **title** (Text, Required): The title of the project.\n    \n- **description** (Text, Required): The description of the project.\n    \n- **start_date** (Text, Required): The start date of the project.\n    \n- **end_date** (Text, Optional): The end date of the project.\n    \n\n## Response\n\n- **Status Code:** 201 Created\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"*****\",\n    \"title\": \"*****\",\n    \"description\": \"*****\",\n    \"status\": \"*****\",\n    \"start_date\": \"*****\",\n    \"end_date\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"institution\": {\n      \"id\": \"*****\",\n      \"name\": \"*****\",\n      \"logo\": \"*****\"\n    },\n    \"admins\": [\n      {\n        \"id\": \"*****\",\n        \"firstName\": \"*****\",\n        \"lastName\": \"*****\",\n        \"email\": \"*****\",\n        \"image_url\": \"*****\",\n        \"phone\": \"*****\",\n        \"role\": \"*****\",\n        \"isActive\": true,\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": null\n      },\n      // ... more admin objects\n    ]\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a POST method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/projects/`.\n    \n- The request body should include details such as title, description, start date, and optional end date.\n    \n- The response has a status code of 201 Created, indicating the project was successfully created.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success of the request.\n    \n- The response body includes a \"data\" object with details of the newly created project, including ID, title, description, status, start and end dates, creation and update timestamps, and related institution and admins."
+					},
+					"response": []
+				},
+				{
+					"name": "List Institution Projects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/?take=10&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								""
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "10"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Projects with Pagination\n\n## URL\n\n`http://localhost:8080/api/v1/projects/?take=5&skip=0`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint makes an HTTP GET request to retrieve a list of projects. The request includes query parameters for pagination, where \"take\" specifies the number of records to fetch, and \"skip\" specifies the number of records to skip.\n\n## Request Parameters\n\n- **take** (Number): The number of records to retrieve.\n    \n- **skip** (Number): The number of pages to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"title\": \"*****\",\n        \"institution\": {\n          \"id\": \"*****\",\n          \"name\": \"*****\",\n          \"logo\": \"*****\"\n        },\n        \"admins\": [\n          {\n            \"id\": \"*****\",\n            \"firstName\": \"*****\",\n            \"lastName\": \"*****\",\n            \"image_url\": \"*****\"\n          },\n          // ... more admin details\n        ],\n        \"form\": [\n          // ... form details\n        ],\n        \"start_date\": \"*****\",\n        \"end_date\": \"*****\",\n        // ... more project attributes\n      },\n      // ... more project records\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should include query parameters for pagination (`?take=5&skip=0`).\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success of the request.\n    \n- The response body includes a \"data\" object with an array of project records (named \"rows\"), each containing various attributes such as id, title, institution details, form details, start and end dates, and other metadata. Additionally, the response includes \"totalCount\", \"totalPages\", and \"currentPage\" for pagination information. The \"data\" object also includes nested objects for \"admins\", \"institution\", and \"form\", providing detailed information about the administrators, institutions, and forms associated with the projects."
+					},
+					"response": []
+				},
+				{
+					"name": "all projects user is in",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/user/:userId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Projects with Pagination\n\n## URL\n\n`http://localhost:8080/api/v1/projects/?take=5&skip=0`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint makes an HTTP GET request to retrieve a list of projects. The request includes query parameters for pagination, where \"take\" specifies the number of records to fetch, and \"skip\" specifies the number of records to skip.\n\n## Request Parameters\n\n- **take** (Number): The number of records to retrieve.\n    \n- **skip** (Number): The number of pages to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"title\": \"*****\",\n        \"institution\": {\n          \"id\": \"*****\",\n          \"name\": \"*****\",\n          \"logo\": \"*****\"\n        },\n        \"admins\": [\n          {\n            \"id\": \"*****\",\n            \"firstName\": \"*****\",\n            \"lastName\": \"*****\",\n            \"image_url\": \"*****\"\n          },\n          // ... more admin details\n        ],\n        \"form\": [\n          // ... form details\n        ],\n        \"start_date\": \"*****\",\n        \"end_date\": \"*****\",\n        // ... more project attributes\n      },\n      // ... more project records\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should include query parameters for pagination (`?take=5&skip=0`).\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success of the request.\n    \n- The response body includes a \"data\" object with an array of project records (named \"rows\"), each containing various attributes such as id, title, institution details, form details, start and end dates, and other metadata. Additionally, the response includes \"totalCount\", \"totalPages\", and \"currentPage\" for pagination information. The \"data\" object also includes nested objects for \"admins\", \"institution\", and \"form\", providing detailed information about the administrators, institutions, and forms associated with the projects."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/460caeb7-2527-4213-8dde-d0a08ccf53ef",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								"460caeb7-2527-4213-8dde-d0a08ccf53ef"
+							]
+						},
+						"description": "# Endpoint: Retrieve Project by ID\n\n## URL\n\n`http://localhost:8080/api/v1/projects/:id`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint sends an HTTP GET request to `http://localhost:8080/api/v1/projects/:id` to retrieve details of a specific project identified by its ID.\n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"*****\",\n    \"title\": \"*****\",\n    \"description\": \"*****\",\n    \"isActive\": true,\n    \"form_id\": \"*****\",\n    \"institution_id\": \"*****\",\n    \"admin_id\": \"*****\",\n    \"start_date\": \"*****\",\n    \"end_date\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": null,\n    \"form\": [\n      // ... form details\n    ],\n    \"institution\": {\n      \"id\": \"*****\",\n      \"name\": \"*****\",\n      \"logo\": \"*****\"\n    },\n    \"admins\": [\n      {\n        \"id\": \"*****\",\n        \"firstName\": \"*****\",\n        \"lastName\": \"*****\",\n        \"image_url\": \"*****\"\n      },\n      // ... more admin details\n    ]\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should include the project ID (`:id`).\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success status of the request.\n    \n- The response body includes a \"data\" object with various details of the project, including ID, title, description, isActive status, form ID, institution ID, admin ID, start date, end date, creation timestamp, update timestamp, deletedAt timestamp, form array, institution object, and admins array."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Update Doc Title\",\r\n    \"description\": \"Naahhh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8ac8739a-5ec6-4ee5-88a0-41b4f22004c5"
+								}
+							]
+						},
+						"description": "\nThis endpoint allows updating a specific project identified by the provided ID. The HTTP PATCH request should be sent to localhost:8080/api/v1/projects/:id with a JSON payload in the raw request body type. The payload should include the fields \"title\" and \"description\" to be updated.\n\n### Request Body\n- title (string, required): The updated title of the project.\n- description (string, required): The updated description of the project.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n\n```json\n{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"\",\n        \"title\": \"\",\n        \"description\": \"\",\n        \"isActive\": true,\n        \"form_id\": null,\n        \"institution_id\": \"\",\n        \"admin_id\": \"\",\n        \"start_date\": \"\",\n        \"end_date\": null,\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"deletedAt\": null,\n        \"form\": [],\n        \"institution\": {\n            \"id\": \"\",\n            \"name\": \"\",\n            \"logo\": \"\"\n        },\n        \"admins\": {\n            \"id\": \"\",\n            \"firstName\": \"\",\n            \"lastName\": \"\",\n            \"image_url\": null\n        }\n    }\n}\n```\nThe response contains a \"success\" flag indicating the success of the operation, and the \"data\" object with the updated project details.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/projects/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8ac8739a-5ec6-4ee5-88a0-41b4f22004c5"
+								}
+							]
+						},
+						"description": "# Endpoint: Delete Project by ID\n\n## URL\n\n`http://localhost:8080/api/v1/projects/:id`\n\n## Method\n\nDELETE\n\n## Description\n\nThis endpoint sends an HTTP DELETE request to `http://localhost:8080/api/v1/projects/:id` to delete a project with the specified ID.\n\n## Request\n\n- **Method:** DELETE\n    \n- **URL:** `http://localhost:8080/api/v1/projects/:id`\n    \n\n## Response\n\n- **Status Code:** 204 No Content\n    \n- **Content Type:** text/xml\n    \n- **Body:** null\n    \n\n## Notes\n\n- The request should be a DELETE method.\n    \n- The endpoint URL should include the project ID (`:id`).\n    \n- The response has a status code of 204, indicating a successful deletion.\n    \n- The Content-Type is set to text/xml.\n    \n- The response body is null."
+					},
+					"response": []
+				},
+				{
+					"name": "List Project Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/projects/:id/users?take=5&skip=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects",
+								":id",
+								"users"
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "ddef0a52-e626-4311-a435-cad871f9e333"
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Users Associated with a Project\n\n## URL\n\n`http://localhost:8080/api/v1/projects/:projectId/users/?take=5&skip=0`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint retrieves a list of users associated with a specific project, identified by the project ID. The query parameters allow for pagination, with the \"take\" parameter specifying the number of records to retrieve and the \"skip\" parameter specifying the number of records to skip.\n\n## Request Parameters\n\n- **projectId** (string): The unique identifier of the project.\n    \n\n### Query Parameters\n\n- **take** (number): The number of records to retrieve.\n    \n- **skip** (number): The number of records to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"firstName\": \"*****\",\n        \"lastName\": \"*****\",\n        \"image_url\": \"*****\",\n        \"email\": \"*****\",\n        \"phone\": \"*****\",\n        \"role\": \"*****\"\n      },\n      // ... more user details\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should include the project ID (`:projectId`).\n    \n- Query parameters for pagination (`?take=5&skip=0`) can be adjusted as needed.\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The success flag indicates the success of the request.\n    \n- The response body includes a \"data\" object with an array of user records (named \"rows\"), each containing various properties such as user ID, first name, last name, image URL, email, phone, and role. Additionally, the response includes metadata such as \"totalCount\", \"totalPages\", and \"currentPage\" for pagination."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institutions",
+			"item": [
+				{
+					"name": "Create Institution",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mobile Test institution",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Kigali",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0780088171",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/educa/Downloads/logoEric.png"
+								},
+								{
+									"key": "category_id",
+									"value": "a3b6bc64-6e35-46e9-83ea-c0a249861d3f",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/institutions/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"institutions",
+								""
+							]
+						},
+						"description": "# Endpoint: Add Institution\n\n## URL\n\n`http://localhost:8080/api/v1/institutions/`\n\n## Method\n\nPOST\n\n## Description\n\nThis endpoint allows the addition of a new institution.\n\n## Request\n\n- **Method:** POST\n    \n- **URL:** `http://localhost:8080/api/v1/institutions/`\n    \n\n### Request Body\n\n- **name** (string, required): The name of the institution.\n    \n- **address** (string, required): The address of the institution.\n    \n- **phone** (string, required): The phone number of the institution.\n    \n- **category_id** (string, required): The category ID of the institution.\n    \n- **email** (string, required): The email address of the institution.\n    \n- **logo** (string, optional): The logo of the institution.\n    \n\n## Response\n\n- **Status Code:** 201 Created\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"name\": \"*****\",\n    \"address\": \"*****\",\n    \"email\": \"*****\",\n    \"phone\": \"*****\",\n    \"category_id\": \"*****\",\n    \"logo\": null,\n    \"category_name\": \"*****\",\n    \"deletedAt\": null,\n    \"id\": \"*****\",\n    \"isActive\": true,\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a POST method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/institutions/`.\n    \n- The request body should include parameters for the institution's name, address, phone, category ID, email, and an optional logo.\n    \n- The response has a status code of 201, indicating the successful creation of the institution.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object containing details related to the added institution, including its name, address, email, phone, category ID, logo, category name, and other metadata."
+					},
+					"response": []
+				},
+				{
+					"name": "List Institutions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/institutions/?take=5&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"institutions",
+								""
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Retrieve List of Institutions\n\n## URL\n\n`http://localhost:8080/api/v1/institutions/`\n\n## Method\n\nGET\n\n## Description\n\nThis API endpoint makes an HTTP GET request to retrieve a list of institutions. The request should be sent to `http://localhost:8080/api/v1/institutions/` with query parameters for pagination, where \"take\" specifies the number of items to retrieve and \"skip\" specifies the number of items to skip.\n\n## Request Parameters\n\n### Query Parameters\n\n- **take** (number): The number of items to retrieve.\n    \n- **skip** (number): The number of items to skip.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"name\": \"*****\",\n        \"email\": \"*****\",\n        \"logo\": \"*****\",\n        \"address\": \"*****\",\n        \"category_id\": \"*****\",\n        \"category_name\": \"*****\",\n        \"isActive\": true,\n        \"phone\": \"*****\",\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": \"*****\"\n      },\n      // ... more institution details\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/institutions/`.\n    \n- Query parameters for pagination can be adjusted as needed (`?take=5&skip=0`).\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object with an array of institution records (named \"rows\"), each containing various details such as the institution's ID, name, email, logo, address, category ID, category name, activity status, phone, creation timestamp, update timestamp, and deletion timestamp. Additionally, the response includes metadata such as \"totalCount\", \"totalPages\", and \"currentPage\" for pagination."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Institution",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "New Rayon Sport",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Administrator/Pictures/Screenshots/Screenshot 2024-02-15 124655.png"
+								},
+								{
+									"key": "address",
+									"value": "Kigali",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rayonsport@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "c0e71122-7e2b-43df-951b-6f3eabc7de8a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/institutions/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"institutions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "792321fa-6dca-4d97-afc2-2c794d7f53e2"
+								}
+							]
+						},
+						"description": "# Endpoint: Update Institution Details\n\n## URL\n\n`http://localhost:8080/api/v1/institutions/:id`\n\n## Method\n\nPUT\n\n## Description\n\nThis endpoint is used to update the details of a specific institution.\n\n## Request Parameters\n\n- **name** (text): The updated name of the institution.\n    \n- **file** (file): The updated logo of the institution.\n    \n- **address** (text): The updated address of the institution.\n    \n- **email** (text): The updated email address of the institution.\n    \n- **category_id** (text): The updated category ID of the institution.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"*****\",\n    \"name\": \"*****\",\n    \"email\": \"*****\",\n    \"logo\": \"*****\",\n    \"address\": \"*****\",\n    \"category_id\": \"*****\",\n    \"category_name\": \"*****\",\n    \"isActive\": true,\n    \"phone\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\",\n    \"deletedAt\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PUT method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/institutions/:id`.\n    \n- The request parameters include the updated details of the institution, such as the name, logo, address, email, and category ID.\n    \n- The response has a status code of 200, indicating a successful update.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object with the updated details of the institution, including ID, name, email, logo, address, category ID, category name, status, phone, creation and update timestamps, and deletion status."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Institution",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/institutions/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"institutions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8e1d95e5-d09d-4e3b-bb64-4edf2132b9cd"
+								}
+							]
+						},
+						"description": "# Endpoint: Delete Institution by ID\n\n## URL\n\n`http://localhost:8080/api/v1/institutions/:id`\n\n## Method\n\nDELETE\n\n## Description\n\nThis endpoint sends an HTTP DELETE request to delete the institution with the specified ID.\n\n## Request\n\n- **Method:** DELETE\n    \n- **URL:** `http://localhost:8080/api/v1/institutions/:id`\n    \n\n## Response\n\n- **Status Code:** 204\n    \n- **Content Type:** text/xml\n    \n\n### Response Body\n\n`null`\n\n## Notes\n\n- The request should be a DELETE method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/institutions/:id`.\n    \n- The response has a status code of 204, indicating a successful deletion.\n    \n- The Content-Type is set to text/xml.\n    \n- The response body is null."
+					},
+					"response": []
+				},
+				{
+					"name": "List Institution Admins",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/institution-admins/?take=2&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-admins",
+								""
+							],
+							"query": [
+								{
+									"key": "take",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Get Institution Admins\n\n## URL\n\n`http://localhost:8080/api/v1/institutions/admins`\n\n## Method\n\nGET\n\n## Description\n\nThis endpoint retrieves a list of institution admins with the ability to paginate the results.\n\n## Request Parameters\n\n- **take** (query parameter): The number of records to retrieve.\n    \n- **skip** (query parameter): The number of records to skip for pagination.\n    \n\n## Response\n\n- **Status Code:** 200\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"firstName\": \"*****\",\n        \"lastName\": \"*****\",\n        \"image_url\": \"*****\",\n        \"email\": \"*****\",\n        \"phone\": \"*****\",\n        \"institution_id\": \"*****\",\n        \"institution\": {\n          \"id\": \"*****\",\n          \"name\": \"*****\",\n          \"logo\": \"*****\"\n        }\n      },\n      // Additional institution admin objects\n    ],\n    \"totalCount\": \"*****\",\n    \"totalPages\": \"*****\",\n    \"currentPage\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/institutions/admins`.\n    \n- The request parameters include the number of records to retrieve (`take`) and the number of records to skip for pagination (`skip`).\n    \n- The response has a status code of 200, indicating a successful request.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object. The \"data\" object contains an array of institution admin objects (`rows`), each containing details such as ID, first name, last name, image URL, email, phone, institution ID, and more. Additionally, the response includes metadata such as `totalCount`, `totalPages`, and `currentPage` to facilitate pagination. Each institution admin object within the `rows` array also includes details about the associated institution."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forms",
+			"item": [
+				{
+					"name": "Create Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mobile Form\",\r\n    \"visibility\": \"public\",\r\n    \"target_enties\": 3000,\r\n    \"description\": \"The mobile form for testing\",\r\n    \"record_location\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/forms?project_id=460caeb7-2527-4213-8dde-d0a08ccf53ef",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "460caeb7-2527-4213-8dde-d0a08ccf53ef"
+								}
+							]
+						},
+						"description": "# Endpoint: Add Form\n\n## URL\n\n`http://localhost:8080/api/v1/forms/`\n\n## Method\n\nPOST\n\n## Description\n\nThis endpoint allows you to add a new form.\n\n## Request Body\n\n- **name** (string, required): The name of the form.\n    \n- **visibility** (string, required): The visibility of the form.\n    \n- **target_entries** (number, required): The target number of entries for the form.\n    \n- **description** (string, required): The description of the form.\n    \n- **record_location** (boolean, required): Indicates whether to record the location for the form.\n    \n- **project_id** (string, required): The ID of the project associated with the form.\n    \n\n## Response\n\n- **Status Code:** 201 Created\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"name\": \"*****\",\n    \"admin_id\": \"*****\",\n    \"project_id\": \"*****\",\n    \"visibility\": \"*****\",\n    \"target_entries\": \"*****\",\n    \"description\": \"*****\",\n    \"recordLocation\": true,\n    \"deletedAt\": null,\n    \"id\": \"*****\",\n    \"isActive\": true,\n    \"createdAt\": \"*****\",\n    \"updatedAt\": \"*****\"\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a POST method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms/`.\n    \n- The request body should include parameters such as `name`, `visibility`, `target_entries`, `description`, `record_location`, and `project_id`.\n    \n- The response has a status code of 201, indicating a successful creation.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object. The \"data\" object contains details of the newly created form, including its `name`, `admin_id`, `project_id`, `visibility`, `target_entries`, `description`, `recordLocation`, `deletedAt`, `id`, `isActive`, `createdAt`, and `updatedAt`."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Updated New Form\",\r\n   \"record_location\": true,\r\n   \"description\": \"This is an updated description my guyy\",\r\n   \"target_entries\": 1000,\r\n   \"visibility\": \"private\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/forms/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b86c43a8-48ee-4032-b6ea-22fe92b14064"
+								}
+							]
+						},
+						"description": "# Endpoint: Update Form Details\n\n## URL\n\n`http://localhost:8080/api/v1/forms/:id`\n\n## Method\n\nPATCH\n\n## Request\n\n- **Headers:**\n    \n    - Content-Type: application/json\n        \n- { \"name\": \"\", \"record_location\": true, \"description\": \"\", \"target_entries\": 0, \"visibility\": \"\"}\n    \n\n## Response\n\n- **Status Code:** 200\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"progress\": null,\n    \"totalEntries\": 0,\n    \"id\": \"*****\",\n    \"name\": \"*****\",\n    \"description\": \"*****\",\n    \"isActive\": true,\n    \"target_entries\": 0,\n    \"visibility\": \"*****\",\n    \"project_id\": \"*****\",\n    \"admin_id\": \"*****\",\n    \"sections\": [\n      {\n        \"id\": \"*****\",\n        \"name\": \"*****\",\n        \"description\": null,\n        \"order\": 0,\n        \"is_required\": true,\n        \"isActive\": true,\n        \"form_id\": \"*****\",\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": null,\n        \"fields\": []\n      }\n    ],\n    \"updatedAt\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"deletedAt\": null,\n    \"recordLocation\": true\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a PATCH method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms/:id`.\n    \n- Headers should include `Content-Type: application/json`.\n    \n- The request body should include parameters such as `name`, `record_location`, `description`, `target_entries`, and `visibility`.\n    \n- The response has a status code of 200, indicating a successful update.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object. The \"data\" object contains details of the updated form, including its `progress`, `totalEntries`, `id`, `name`, `description`, `isActive`, `target_entries`, `visibility`, `project_id`, `admin_id`, `sections`, `updatedAt`, `createdAt`, `deletedAt`, and `recordLocation`. The \"sections\" array includes information about the form's sections, and each section includes details such as `id`, `name`, `description`, `order`, `is_required`, `isActive`, `form_id`, `createdAt`, `updatedAt`, `deletedAt`, and `fields`."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/forms/abee05b3-fddf-444c-a1ef-c9f15c572bd3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								"abee05b3-fddf-444c-a1ef-c9f15c572bd3"
+							]
+						},
+						"description": "# Endpoint: Get Form Details by ID\n\n## URL\n\n`http://localhost:8080/api/v1/forms/:id`\n\n## Method\n\nGET\n\n## Request\n\n- **Path Parameters:**\n    \n    - :id (string) - The unique identifier of the form.\n        \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"progress\": 0,\n    \"totalEntries\": 0,\n    \"id\": \"*****\",\n    \"name\": \"*****\",\n    \"description\": \"*****\",\n    \"isActive\": true,\n    \"target_entries\": 0,\n    \"visibility\": \"*****\",\n    \"project_id\": \"*****\",\n    \"admin_id\": \"*****\",\n    \"sections\": [\n      {\n        \"id\": \"*****\",\n        \"name\": \"*****\",\n        \"description\": null,\n        \"order\": 0,\n        \"is_required\": true,\n        \"isActive\": true,\n        \"form_id\": \"*****\",\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": null,\n        \"fields\": []\n      }\n    ],\n    \"updatedAt\": \"*****\",\n    \"createdAt\": \"*****\",\n    \"deletedAt\": null,\n    \"recordLocation\": true\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms/:id`.\n    \n- The response has a status code of 200, indicating a successful retrieval.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object. The \"data\" object contains details of the form, including its `progress`, `totalEntries`, `id`, `name`, `description`, `isActive`, `target_entries`, `visibility`, `project_id`, `admin_id`, `sections`, `updatedAt`, `createdAt`, `deletedAt`, and `recordLocation`. The \"sections\" array includes information about the form's sections, and each section includes details such as `id`, `name`, `description`, `order`, `is_required`, `isActive`, `form_id`, `createdAt`, `updatedAt`, `deletedAt`, and `fields`."
+					},
+					"response": []
+				},
+				{
+					"name": "List Forms",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/forms?project_id=ddef0a52-e626-4311-a435-cad871f9e333&take=2&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "ddef0a52-e626-4311-a435-cad871f9e333"
+								},
+								{
+									"key": "take",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Endpoint: Get Forms by Project ID with Pagination\n\n## URL\n\n`http://localhost:8080/api/v1/forms`\n\n## Method\n\nGET\n\n## Request Parameters\n\n- **take (query parameter):** The number of items to retrieve.\n    \n- **skip (query parameter):** The number of items to skip for pagination.\n    \n- **project_id (query parameter):** The ID of the project associated with the forms.\n    \n\n## Response\n\n- **Status Code:** 200 OK\n    \n- **Content Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"*****\",\n        \"name\": \"*****\",\n        \"description\": \"*****\",\n        \"target_entries\": 0,\n        \"isActive\": true,\n        \"recordLocation\": true,\n        \"visibility\": \"*****\",\n        \"project_id\": \"*****\",\n        \"admin_id\": \"*****\",\n        \"createdAt\": \"*****\",\n        \"updatedAt\": \"*****\",\n        \"deletedAt\": null,\n        \"sections\": [\n          {\n            \"id\": \"*****\",\n            \"name\": \"*****\",\n            \"description\": \"*****\",\n            \"order\": 0,\n            \"is_required\": true,\n            \"isActive\": true,\n            \"form_id\": \"*****\",\n            \"createdAt\": \"*****\",\n            \"updatedAt\": \"*****\",\n            \"deletedAt\": null,\n            \"fields\": [\n              {\n                \"id\": \"*****\",\n                \"label\": \"*****\",\n                \"placeholder\": \"*****\",\n                \"field_type\": \"*****\",\n                \"options\": \"*****\",\n                \"is_required\": true,\n                \"default_value\": \"*****\",\n                \"isActive\": true,\n                \"form_id\": \"*****\",\n                \"section_id\": \"*****\",\n                \"createdAt\": \"*****\",\n                \"updatedAt\": \"*****\",\n                \"deletedAt\": null\n              }\n            ]\n          }\n        ]\n      }\n    ],\n    \"totalCount\": 0,\n    \"totalPages\": 0,\n    \"currentPage\": 0\n  }\n}\n\n ```\n\n## Notes\n\n- The request should be a GET method.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms`.\n    \n- The response has a status code of 200, indicating a successful retrieval.\n    \n- The Content-Type is set to application/json.\n    \n- The response body includes a \"success\" flag and a \"data\" object. The \"data\" object contains details of the forms, including an array of \"rows\", each representing a form. Each form row includes fields such as `id`, `name`, `description`, `target_entries`, `isActive`, `recordLocation`, `visibility`, `project_id`, `admin_id`, `createdAt`, `updatedAt`, `deletedAt`, and `sections`. Each section includes fields such as `id`, `name`, `description`, `order`, `is_required`, `isActive`, `form_id`, `createdAt`, `updatedAt`, `deletedAt`, and `fields`. Each field includes fields such as `id`, `label`, `placeholder`, `field_type`, `options`, `is_required`, `default_value`, `isActive`, `form_id`, `section_id`, `createdAt`, `updatedAt`, and `deletedAt`.\n    \n- The response also includes `totalCount`, `totalPages`, and `currentPage` for pagination information."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/forms/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82"
+								}
+							]
+						},
+						"description": "# Delete Form by ID\n\n## URL\n\n`http://localhost:8080/api/v1/forms/:id`\n\n## Method\n\nDELETE\n\n## Request\n\n- **Method:** DELETE\n    \n- **URL:** `http://localhost:8080/api/v1/forms/:id`\n    \n\n## Response\n\n- **Status Code:** 204\n    \n- **Content Type:** text/xml\n    \n- **Body:** null\n    \n\n## Notes\n\n- The request method should be DELETE.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms/:id`.\n    \n- The server responds with a status code of 204, indicating successful deletion.\n    \n- The Content-Type is set to text/xml.\n    \n- The response body is null."
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/forms/:id/restore",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								":id",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Form Entries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/forms/:id/entries?start_date=2024-02-10&end_date=2024-02-14&take=5&skip=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"forms",
+								":id",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2024-02-10"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-02-14"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82"
+								}
+							]
+						},
+						"description": "# Get Form Entries by Date Range\n\n## URL\n\n`http://localhost:8080/api/v1/forms/:id/entries`\n\n## Method\n\nGET\n\n## Request\n\n- **Method:** GET\n    \n- **URL:** `http://localhost:8080/api/v1/forms/:id/entries?start_date=2024-02-10&end_date=2024-02-14&take=5&page=2`\n    \n\n## Response\n\n- **Status Code:** 200\n    \n- **Content Type:** application/json\n    \n- **Body:**\n    \n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"rows\": [\n            {\n                \"id\": \"\",\n                \"form_id\": \"\",\n                \"user_id\": \"\",\n                \"isActive\": true,\n                \"createdAt\": \"\",\n                \"updatedAt\": \"\",\n                \"deletedAt\": null,\n                \"field_data\": [\n                    {\n                        \"id\": \"\",\n                        \"value\": \"\",\n                        \"field_id\": \"\",\n                        \"isActive\": true,\n                        \"form_id\": \"\",\n                        \"user_id\": \"\",\n                        \"entry_id\": \"\",\n                        \"createdAt\": \"\",\n                        \"updatedAt\": \"\",\n                        \"deletedAt\": null,\n                        \"field\": {\n                            \"id\": \"\",\n                            \"label\": \"\",\n                            \"placeholder\": \"\",\n                            \"field_type\": \"\",\n                            \"options\": null,\n                            \"is_required\": true,\n                            \"default_value\": null,\n                            \"isActive\": true,\n                            \"form_id\": \"\",\n                            \"section_id\": \"\",\n                            \"createdAt\": \"\",\n                            \"updatedAt\": \"\",\n                            \"deletedAt\": null\n                        }\n                    }\n                ],\n                \"user\": {\n                    \"id\": \"\",\n                    \"firstName\": \"\",\n                    \"lastName\": \"\",\n                    \"image_url\": null,\n                    \"otp\": null,\n                    \"email\": \"\",\n                    \"phone\": \"\",\n                    \"institution_id\": \"\",\n                    \"isActive\": true,\n                    \"role\": \"\",\n                    \"createdAt\": \"\",\n                    \"updatedAt\": \"\",\n                    \"deletedAt\": null,\n                    \"institution\": {\n                        \"id\": \"\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"logo\": \"\",\n                        \"address\": \"\",\n                        \"category_id\": \"\",\n                        \"category_name\": \"\",\n                        \"isActive\": true,\n                        \"phone\": \"\",\n                        \"createdAt\": \"\",\n                        \"updatedAt\": \"\",\n                        \"deletedAt\": null\n                    }\n                }\n            }\n        ],\n        \"totalCount\": 0,\n        \"totalPages\": 0,\n        \"currentPage\": 0\n    },\n    \"period\": {\n        \"start_date\": \"\",\n        \"end_date\": \"\"\n    }\n}\n\n ```\n\n## Notes\n\n- The request method should be GET.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/forms/:id/entries`.\n    \n- Query parameters include `start_date` for the start date of the range, `end_date` for the end date of the range, `take` for the number of entries to retrieve, and `page` for the number of pages to skip.\n    \n- The response includes a success flag, data object with form entries, and period object indicating the date range.\n    \n- Each form entry includes user details, field data, and other relevant information.\n    \n- The actual values for entry and user details are intentionally masked for privacy."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fields",
+			"item": [
+				{
+					"name": "Create Form Fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": [\r\n        {\r\n            \"label\": \"Full Name\",\r\n            \"placeholder\": \"John Doe\",\r\n            \"is_required\": true,\r\n            \"field_type\": \"text\",\r\n            \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\"\r\n        },\r\n         {\r\n      \"label\": \"Gender\",\r\n      \"placeholder\": null,\r\n      \"is_required\": true,\r\n      \"field_type\": \"radio\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"options\": [\"Male\", \"Female\", \"Other\"],\r\n      \"default_value\": \"Other\"\r\n    }, {\r\n      \"label\": \"Profile Picture\",\r\n      \"placeholder\": null,\r\n      \"is_required\": true,\r\n      \"field_type\": \"file\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": null\r\n    },\r\n     {\r\n      \"label\": \"Contact Number\",\r\n      \"placeholder\": \"Enter your phone number\",\r\n      \"is_required\": true,\r\n      \"field_type\": \"tel\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    },{\r\n      \"label\": \"Personal Website\",\r\n      \"placeholder\": \"URL of your website\",\r\n      \"is_required\": false,\r\n      \"field_type\": \"url\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"Email Address\",\r\n      \"placeholder\": \"Enter your email\",\r\n      \"is_required\": true,\r\n      \"field_type\": \"email\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    }, {\r\n      \"label\": \"Birthday\",\r\n      \"placeholder\": \"Select your birth date\",\r\n      \"is_required\": true,\r\n      \"field_type\": \"date\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"Age\",\r\n      \"placeholder\": \"Enter your age\",\r\n      \"is_required\": true,\r\n      \"field_type\": \"number\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    },\r\n    {\r\n      \"label\": \"Your Bio\",\r\n      \"placeholder\": \"Tell us about yourself\",\r\n      \"is_required\": false,\r\n      \"field_type\": \"textarea\",\r\n      \"section_id\": \"993cb400-ba18-4481-9b24-d5e83b0ff149\",\r\n      \"default_value\": \"\"\r\n    }\r\n    ],\r\n    \"form_id\": \"abee05b3-fddf-444c-a1ef-c9f15c572bd3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fields",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fields"
+							]
+						},
+						"description": "# Add Fields to Form\n\n## URL\n\n`http://localhost:8080/api/v1/fields`\n\n## Method\n\nPOST\n\n## Request\n\n- **Method:** POST\n- **URL:** `http://localhost:8080/api/v1/fields?form_id=62bac6ad-9a67-4711-bced-c362afd3de82`\n- **Body:**\n    \n\n``` json\n{\n  \"fields\": [\n    {\n      \"label\": \"Field Label\",\n      \"placeholder\": \"Field Placeholder\",\n      \"is_required\": true,\n      \"field_type\": \"text\",\n      \"options\": \"Select Field Options\",\n      \"section_id\": \"Field Parent Section\",\n      \"default_value\": \"Default Value\"\n    }\n  ],\n  \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\"\n}\n\n ```\n\n## Response\n\n- **Status Code:** 201\n- **Content Type:** application/json\n- **Body:**\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": [\n    {\n      \"label\": \"Field Label\",\n      \"placeholder\": \"Field Placeholder\",\n      \"field_type\": \"text\",\n      \"default_value\": \"Default Value\",\n      \"is_required\": true,\n      \"isActive\": true,\n      \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\",\n      \"section_id\": \"\",\n      \"deletedAt\": null,\n      \"id\": \"GeneratedID\",\n      \"createdAt\": \"2024-02-15T12:00:00Z\",\n      \"updatedAt\": \"2024-02-15T12:00:00Z\"\n    }\n  ]\n}\n\n ```\n\n## Notes\n\n- The request method should be POST.\n- The endpoint URL should be `http://localhost:8080/api/v1/fields?form_id=62bac6ad-9a67-4711-bced-c362afd3de82`.\n- Query parameter `form_id` is required and should be the ID of the form to which the fields are to be added.\n- The request body should include a JSON payload with an array of field objects.\n- Each field object should have properties like `label`, `placeholder`, `is_required`, `field_type`, and `default_value`.\n- The response includes a success flag and an array of field objects with details of the added fields.\n- The actual values for field details are provided in the response."
+					},
+					"response": []
+				},
+				{
+					"name": "List Form Fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fields/?form_id=62bac6ad-9a67-4711-bced-c362afd3de82&take=10&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fields",
+								""
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82"
+								},
+								{
+									"key": "take",
+									"value": "10"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Get Fields by Form ID\n\n## URL\n\n`http://localhost:8080/api/v1/fields`\n\n## Method\n\nGET\n\n## Request\n\n- **Method:** GET\n    \n- **URL:** `http://localhost:8080/api/v1/fields?form_id=62bac6ad-9a67-4711-bced-c362afd3de82&take=10&skip=0`\n    \n\n## Response\n\n- **Status Code:** 200\n    \n- **Content Type:** application/json\n    \n- **Body:**\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"field1\",\n        \"label\": \"Field 1\",\n        \"placeholder\": \"Enter Field 1\",\n        \"field_type\": \"text\",\n        \"options\": null,\n        \"is_required\": true,\n        \"isActive\": true,\n        \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\",\n        \"section_id\": \"\",\n        \"createdAt\": \"2024-02-15T12:00:00Z\",\n        \"updatedAt\": \"2024-02-15T13:00:00Z\",\n        \"deletedAt\": null\n      },\n      {\n        \"id\": \"field2\",\n        \"label\": \"Field 2\",\n        \"placeholder\": \"Enter Field 2\",\n        \"field_type\": \"number\",\n        \"options\": [\"Option1\", \"Option2\"],\n        \"is_required\": false,\n        \"isActive\": true,\n        \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\",\n        \"section_id\": \"\",\n        \"createdAt\": \"2024-02-15T12:30:00Z\",\n        \"updatedAt\": \"2024-02-15T13:30:00Z\",\n        \"deletedAt\": null\n      }\n    ],\n    \"totalCount\": 2,\n    \"totalPages\": 1,\n    \"currentPage\": 1\n  }\n}\n\n ```\n\n## Notes\n\n- The request method should be GET.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/fields?form_id=62bac6ad-9a67-4711-bced-c362afd3de82&take=10&skip=0`.\n    \n- The response includes a success flag and an object with retrieved fields and pagination information.\n    \n- Each field object in the \"rows\" array contains details such as `id`, `label`, `placeholder`, `field_type`, `options`, `is_required`, `isActive`, `form_id`, `section_id`, `createdAt`, `updatedAt`, and `deletedAt`."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Field",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"options\": [1, 2, 4],\r\n    \"field_type\": \"select\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fields/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fields",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3c508a92-fb7d-4bb0-9694-5ba05b2d24cc"
+								}
+							]
+						},
+						"description": "# Update Field by ID\n\n## URL\n\n`http://localhost:8080/api/v1/fields/:id`\n\n## Method\n\nPATCH\n\n## Request\n\n- **Method:** PATCH\n    \n- **URL:** `http://localhost:8080/api/v1/fields/abc123`\n    \n- **Body:**\n    \n\n``` json\n{\n  \"label\": \"Updated Label\",\n  \"placeholder\": \"Updated Placeholder\",\n  \"is_required\": true,\n  \"field_type\": \"text\",\n  \"default_value\": \"Updated Default Value\",\n  \"options\": [\"Option1\", \"Option2\"]\n}\n\n ```\n\n## Response\n\n- **Status Code:** 200\n    \n- **Content Type:** application/json\n    \n- **Body:**\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"abc123\",\n    \"label\": \"Updated Label\",\n    \"placeholder\": \"Updated Placeholder\",\n    \"field_type\": \"text\",\n    \"options\": [\"Option1\", \"Option2\"],\n    \"is_required\": true,\n    \"default_value\": \"Updated Default Value\",\n    \"isActive\": true,\n    \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\",\n    \"section_id\": \"\",\n    \"createdAt\": \"2024-02-15T12:00:00Z\",\n    \"updatedAt\": \"2024-02-15T13:00:00Z\",\n    \"deletedAt\": null\n  }\n}\n\n ```\n\n## Notes\n\n- The request method should be PATCH.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/fields/abc123`.\n    \n- The request body should include a JSON payload with properties like `label`, `placeholder`, `is_required`, `field_type`, `default_value`, and `options`.\n    \n- The response includes a success flag and an object with details of the updated field.\n    \n- The actual values for field details are provided in the response."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Form Fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": [\r\n        {\r\n            \"id\": \"cd1e8993-5fe2-4495-bd0d-289faebf7d26\"\r\n        },\r\n        {\r\n            \"id\": \"13589132-8a42-4ef6-a6c6-9d0d58b5f389\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fields",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fields"
+							]
+						},
+						"description": "# Delete Fields by IDs\n\n## URL\n\n`http://localhost:8080/api/v1/fields`\n\n## Method\n\nDELETE\n\n## Request\n\n- **Method:** DELETE\n    \n- **URL:** `http://localhost:8080/api/v1/fields`\n    \n- **Body:**\n    \n\n``` json\n{\n  \"fields\": [\n    {\"id\": \"field1\"},\n    {\"id\": \"field2\"}\n  ]\n}\n\n ```\n\n## Response\n\n- **Status Code:** 204\n    \n- **Content Type:** text/xml\n    \n\n## Notes\n\n- The request method should be DELETE.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/fields`.\n    \n- The request body should include an array of field objects with their respective IDs.\n    \n- The response includes a status code of 204 with a content type of text/xml, indicating a successful deletion."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Field Data",
+			"item": [
+				{
+					"name": "Create Field Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "form_id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"description": "c378830b-1328-4b83-89aa-bd48ea24f8e6",
+									"type": "file",
+									"src": "/C:/Users/PRINCE/Pictures/Screenshots/c378830b-1328-4b83-89aa-bd48ea24f8e6.png"
+								},
+								{
+									"key": "3c508a92-fb7d-4bb0-9694-5ba05b2d24cc",
+									"value": "This is a description field",
+									"type": "text"
+								},
+								{
+									"key": "3ff549c1-4646-4ea4-879b-f598158280da",
+									"value": "07846725636",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/field-data",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"field-data"
+							]
+						},
+						"description": "# Add Field Data\n\n## URL\n\n`http://localhost:8080/api/v1/field-data`\n\n## Method\n\nPOST\n\n## Request\n\n- **Method:** POST\n    \n- **URL:** `http://localhost:8080/api/v1/field-data`\n    \n- **Body:**\n    \n    - **Type:** Form Data\n        \n\n**Form Data Parameters:**\n\n- `form_id`: The ID of the form to which the field data is being added.\n    \n- `files`: The file containing the field data.\n    \n- `3c508a92-fb7d-4bb0-9694-5ba05b2d24cc`: Description for a specific field data.\n    \n- `3ff549c1-4646-4ea4-879b-f598158280da`: Description for another specific field data.\n    \n\n## Response\n\n- **Status Code:** 201\n    \n- **Content Type:** application/json\n    \n- **Body:**\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": [\n    {\n      \"value\": \"field_value_1\",\n      \"field_id\": \"3c508a92-fb7d-4bb0-9694-5ba05b2d24cc\",\n      \"form_id\": \"form_id_1\",\n      \"entry_id\": \"entry_id_1\",\n      \"deletedAt\": null,\n      \"id\": \"field_data_id_1\",\n      \"isActive\": true,\n      \"createdAt\": \"2024-02-15T12:00:00Z\",\n      \"updatedAt\": \"2024-02-15T12:30:00Z\"\n    },\n    {\n      \"value\": \"field_value_2\",\n      \"field_id\": \"3ff549c1-4646-4ea4-879b-f598158280da\",\n      \"form_id\": \"form_id_1\",\n      \"entry_id\": \"entry_id_1\",\n      \"deletedAt\": null,\n      \"id\": \"field_data_id_2\",\n      \"isActive\": true,\n      \"createdAt\": \"2024-02-15T12:15:00Z\",\n      \"updatedAt\": \"2024-02-15T12:45:00Z\"\n    }\n  ]\n}\n\n ```\n\n## Notes\n\n- The request method should be POST.\n    \n- The endpoint URL should be `http://localhost:8080/api/v1/field-data`.\n    \n- The request body should be of type Form Data and include the `form_id` and descriptions for specific field data.\n    \n- The `files` field can contain the file data for the field.\n    \n- The response includes a status code of 201 with a content type of application/json.\n    \n- The response body includes a success flag set to true and an array of data objects representing field entries with their attributes."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Form Field Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/field-data?form_id=62bac6ad-9a67-4711-bced-c362afd3de82&start_date=2024-02-12&end_date=2024-02-19&take=2&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"field-data"
+							],
+							"query": [
+								{
+									"key": "form_id",
+									"value": "62bac6ad-9a67-4711-bced-c362afd3de82"
+								},
+								{
+									"key": "start_date",
+									"value": "2024-02-12"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-02-19"
+								},
+								{
+									"key": "take",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "# Get Field Data\n\nThis endpoint makes an HTTP GET request to fetch field data based on the provided `form_id` and optional parameters.\n\n## Request\n\n**HTTP Method:** `GET`\n\n**Endpoint:** `http://localhost:8080/api/v1/field-data`\n\n## Request Parameters\n\n- `form_id` (string, required): The unique identifier of the form for which the field data is being fetched.\n    \n- `start_date` (string, optional): The start date for the data retrieval.\n    \n- `end_date` (string, optional): The end date for the data retrieval.\n    \n- `take` (integer, optional): The number of records to retrieve.\n    \n- `skip` (integer, optional): The number of records to skip from the beginning.\n    \n\n## Response\n\n**Status Code:** `200`\n\n**Content-Type:** `application/json`\n\nThe response will include a success flag indicating the success of the request, along with the data object containing an array of rows. Each row will include field data, user information, and metadata such as total count, total pages, and current page."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Data Field",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"contentType": "",
+									"type": "file",
+									"src": "/C:/Users/PRINCE/Pictures/Screenshots/c378830b-1328-4b83-89aa-bd48ea24f8e6.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/field-data/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"field-data",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3d6ea148-442d-43aa-b499-8dbf6be530d0"
+								}
+							]
+						},
+						"description": "# Update Field Data\n\nThis API endpoint allows you to update field data by sending an HTTP PATCH request to `localhost:8080/api/v1/field-data/:id`. The request should include a `form-data` body with the following parameters:\n\n## Request\n\n**HTTP Method:** `PATCH`\n\n**Endpoint:** `localhost:8080/api/v1/field-data/:id`\n\n**Request Headers:**\n\n- Content-Type: `multipart/form-data`\n    \n\n**Request Body:**\n\n- `file` (file): The file to be updated.\n- `value` (any): The value to update field data.\n    \n\n**Example Request:**\n\n``` http\nPATCH /api/v1/field-data/:id HTTP/1.1\nHost: localhost:8080\nContent-Type: multipart/form-data; boundary=---------------------------974767299852498929531610575\n-----------------------------974767299852498929531610575\nContent-Disposition: form-data; name=\"file\"; filename=\"updated_file.txt\"\nContent-Type: text/plain\n[content of the updated file]\n-----------------------------974767299852498929531610575\nContent-Disposition: form-data; name=\"value\"\nupdated_value\n-----------------------------974767299852498929531610575--\n\n ```\n\n## Response\n\n**Status Code:** `200`\n\n**Content-Type:** `application/json`\n\n**Response Body:**\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"\",\n        \"value\": \"\",\n        \"field_id\": \"\",\n        \"isActive\": true,\n        \"form_id\": \"\",\n        \"user_id\": null,\n        \"entry_id\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"deletedAt\": null,\n        \"field\": {\n            \"id\": \"\",\n            \"label\": \"\",\n            \"placeholder\": null,\n            \"field_type\": \"\",\n            \"options\": null,\n            \"is_required\": true,\n            \"default_value\": null,\n            \"isActive\": true,\n            \"form_id\": \"\",\n            \"section_id\": \"\",\n            \"createdAt\": \"\",\n            \"updatedAt\": \"\",\n            \"deletedAt\": null\n        }\n    }\n}\n\n ```\n\nThe response will include a `success` flag indicating whether the operation was successful and a `data` object containing the updated field data."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Data Field",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/field-data/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"field-data",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3d6ea148-442d-43aa-b499-8dbf6be530d0"
+								}
+							]
+						},
+						"description": "# Delete Field Data\n\nThis API endpoint sends an HTTP DELETE request to `localhost:8080/api/v1/field-data/:id` to delete a specific field data identified by the provided ID.\n\n## Request\n\n**HTTP Method:** `DELETE`\n\n**Endpoint:** `localhost:8080/api/v1/field-data/:id`\n\n## Response\n\n**Status Code:** `204`\n\n**Content-Type:** `application/json`\n\nThe response returns a status code of 204, indicating a successful deletion. The Content-Type is set to `application/json`. The response body is null."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Form Entries",
+			"item": [
+				{
+					"name": "Create Entry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"form_id\": \"62bac6ad-9a67-4711-bced-c362afd3de82\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/form-entries/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"form-entries",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard Stats",
+			"item": [
+				{
+					"name": "Institution",
+					"item": [
+						{
+							"name": "Entries",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/entries?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"entries"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "# Retrieve Dashboard Entries for Institution\n\nThis endpoint retrieves the dashboard entries for a specific institution using the institution ID as a query parameter.\n\n## Request\n\n**HTTP Method:** `GET`\n\n**Endpoint:** `http://localhost:8080/api/v1/dashboard/institution/entries`\n\n## Request Parameters\n\n- `institution_id` (string, required): The unique identifier of the institution for which the dashboard entries are being retrieved.\n    \n\n**Example Request:**\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institution/entries?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab\n\n ```\n\n## Response\n\n**Status Code:** `200`\n\n**Content-Type:** `application/json`\n\nThe response includes a `success` flag with a boolean value and a `data` object containing the number of entries.\n\n**Example Response:**\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\nAdjust the details based on the conventions and requirements of your API documentation."
+							},
+							"response": []
+						},
+						{
+							"name": "Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/projects?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"projects"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "# Retrieve Projects for Institution\n\nThis endpoint retrieves the projects associated with a specific institution using the institution ID as a query parameter.\n\n## Request\n\n**HTTP Method:** `GET`\n\n**Endpoint:** `http://localhost:8080/api/v1/dashboard/institution/projects`\n\n## Query Parameters\n\n- `institution_id` (string, required): The unique identifier of the institution for which the projects are being retrieved.\n    \n\n**Example Request:**\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institution/projects?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab\n\n ```\n\n## Response\n\n**Status Code:** `200`\n\n**Content-Type:** `application/json`\n\nThe response includes a `success` flag with a boolean value and a `data` object containing the number of projects associated with the institution.\n\n**Example Response:**\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\nAdjust the details based on the conventions and requirements of your API documentation."
+							},
+							"response": []
+						},
+						{
+							"name": "Progress",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/progress?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"progress"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "# Retrieve Institution Progress\n\nThis endpoint retrieves the progress of an institution specified by the `institution_id` parameter. The request should be sent via an HTTP GET method to the specified URL, and the `institution_id` parameter should be included in the query string.\n\n## Request\n\n**HTTP Method:** `GET`\n\n**Endpoint:** `http://localhost:8080/api/v1/dashboard/institution/progress`\n\n## Query Parameters\n\n- `institution_id` (string, required): The unique identifier of the institution for which the progress is to be retrieved.\n    \n\n**Example Request:**\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institution/progress?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab\n\n ```\n\n## Response\n\n**Status Code:** `200`\n\n**Content-Type:** `application/json`\n\nThe response includes a `success` flag with a boolean value and a `data` object containing the progress value for the specified institution.\n\n**Example Response:**\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\nAdjust the details based on the conventions and requirements of your API documentation."
+							},
+							"response": []
+						},
+						{
+							"name": "Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/users?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"users"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "## Retrieve Users for an Institution - Response\n\nThis API endpoint is designed to retrieve information about users associated with a specific institution. Upon a successful execution of the request, the server responds with a status code of `200` and a JSON object in the response body.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(integer):** Represents the total count of users associated with the institution.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 16\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(integer):** An integer value representing the total count of users associated with the institution.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/institution/users`\n    \n- **Query Parameters:**\n    \n    - `institution_id` (string, required): The unique identifier of the institution for which user information is retrieved.\n        \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institution/users?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 16\n}\n\n ```\n\n### Error Response\n\nIf the request encounters an error, the `success` field will be `false`, and additional error details may be provided.\n\n``` json\n{\n    \"success\": false,\n    \"error\": \"Detailed error message goes here.\"\n}\n\n ```\n\nPlease adjust the details based on the conventions and requirements of your API documentation."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Institution User",
+					"item": [
+						{
+							"name": "Entries",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/user/entries?period=week&user_id=cfc60e9e-f05e-4106-aad4-25a4240d41cc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"user",
+										"entries"
+									],
+									"query": [
+										{
+											"key": "period",
+											"value": "week"
+										},
+										{
+											"key": "user_id",
+											"value": "cfc60e9e-f05e-4106-aad4-25a4240d41cc"
+										}
+									]
+								},
+								"description": "\nThis endpoint retrieves the user's entries for a specific period from the dashboard. It requires the user_id and period as query parameters. The response will include a success status and the data for the specified period.\n\n### Request Parameters\n- `user_id` (string, required): The unique identifier of the user.\n- `period` (string, required): The period for which the entries are requested.\n\n### Response\n- Status: 200\n- Content-Type: application/json\n\nThe response will contain:\n- `success` (boolean): Indicates the success status of the request.\n- `data` (integer): The number of entries for the specified period.\n- `period` (string): The period for which the data is provided.\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/user/projects?user_id=cfc60e9e-f05e-4106-aad4-25a4240d41cc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"user",
+										"projects"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "cfc60e9e-f05e-4106-aad4-25a4240d41cc"
+										}
+									]
+								},
+								"description": "## Retrieve Projects for a User - Response\n\nThis API endpoint is utilized to retrieve the projects associated with a specific user. The request involves making an HTTP GET request to the provided URL with `user_id` as a mandatory query parameter. The server responds with a status code of `200`, and the response body is in JSON format, consisting of a \"success\" boolean field and a \"data\" field containing the number of projects.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(integer):** Represents the number of projects associated with the specified user.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 5\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(integer):** An integer value representing the number of projects associated with the specified user.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/user/projects`\n    \n- **Query Parameters:**\n    \n    - `user_id` (string, required): The unique identifier of the user.\n        \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/user/projects?user_id=1234\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 5\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Progress",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/progress?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"progress"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "This endpoint makes an HTTP GET request to retrieve the progress of an institution's dashboard. It requires the institution_id as a query parameter.\n\n### Request\n\n#### Query Parameters\n\n- institution_id: (string) The unique identifier of the institution.\n    \n\n### Response\n\nUpon a successful request, the server responds with a status code of 200 and a JSON object containing the following keys:\n\n- success: (boolean) Indicates whether the request was successful.\n- data: (number) The progress value for the institution's dashboard."
+							},
+							"response": []
+						},
+						{
+							"name": "Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institution/users?institution_id=09baaad9-707b-4e35-9863-c5287fd2cbab",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institution",
+										"users"
+									],
+									"query": [
+										{
+											"key": "institution_id",
+											"value": "09baaad9-707b-4e35-9863-c5287fd2cbab"
+										}
+									]
+								},
+								"description": "## Retrieve Users for an Institution - Response\n\nThis API endpoint involves sending an HTTP GET request to retrieve the users associated with a specific institution. The request should include the `institution_id` as a mandatory query parameter. Upon successful execution, the server responds with a status code of `200`, and the response body is in JSON format, containing the keys \"success\" and \"data.\"\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(number):** Represents the number of users associated with the specified institution.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(number):** An integer representing the number of users associated with the specified institution.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/institution/users`\n    \n- **Query Parameters:**\n    \n    - `institution_id` (string, required): The unique identifier of the institution.\n        \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institution/users?institution_id=abcd1234\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Super Admin",
+					"item": [
+						{
+							"name": "Entries",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/entries",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"entries"
+									]
+								},
+								"description": "## Dashboard Entries - Response\n\nThis API endpoint involves sending an HTTP GET request to retrieve dashboard entries from the specified API. The response has a status code of `200`, and the content type is set to `application/json`.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(object):** Contains the dashboard entries.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        // Dashboard entries details go here\n    }\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(object):** An object containing the dashboard entries.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/entries`\n    \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/entries\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        // Dashboard entries details go here\n    }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Projects",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/projects",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"projects"
+									]
+								},
+								"description": "## Dashboard Projects - Response\n\nThis API endpoint involves sending an HTTP GET request to retrieve a list of projects for the dashboard. The response has a status code of `200`, and the content type is set to `application/json`.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(number):** Represents the number of projects.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(number):** The number of projects retrieved.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/projects`\n    \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/projects\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Institutions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/institutions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"institutions"
+									]
+								},
+								"description": "## Dashboard Institutions - Response\n\nThis API endpoint sends an HTTP GET request to retrieve a list of institutions for the dashboard. The response has a status code of `200`, and the content type is set to `application/json`.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(number):** Represents the number of institutions.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(number):** The number of institutions retrieved.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/institutions`\n    \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/institutions\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Progress",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/dashboard/progress",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"dashboard",
+										"progress"
+									]
+								},
+								"description": "## Dashboard Progress - Response\n\nThis API endpoint sends an HTTP GET request to retrieve the progress data for the dashboard. The response has a status code of `200`, and the content type is set to `application/json`.\n\n### Response\n\nThe response includes the following components:\n\n- **`success`** **(boolean):** Indicates whether the request was successful.\n    \n- **`data`** **(number):** Represents the progress value for the dashboard.\n    \n\n#### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```\n\n#### Response Components\n\n- **`success`** **(boolean):** A boolean flag indicating the success status of the request. If `true`, the request was successful; otherwise, an error occurred.\n    \n- **`data`** **(number):** The progress value for the dashboard.\n    \n\n### Usage\n\n- **Endpoint:** `GET /api/v1/dashboard/progress`\n    \n\n### Example Request\n\n``` plaintext\nGET http://localhost:8080/api/v1/dashboard/progress\n\n ```\n\n### Example Response\n\n``` json\n{\n    \"success\": true,\n    \"data\": 0\n}\n\n ```"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Institution User",
+			"item": [
+				{
+					"name": "Create Project User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "Nishimwe",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Jolivet",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0788478652",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "realptmusic@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/PRINCE/Pictures/Screenshots/Screenshot 2023-10-23 115740.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/register/?project_id=dc42bc2d-bff2-4527-a134-0bc075bd20c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"register",
+								""
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "dc42bc2d-bff2-4527-a134-0bc075bd20c6"
+								}
+							]
+						},
+						"description": "## Register Institution User - Endpoint\n\nThis API endpoint allows the registration of a new institution user.\n\n### Request\n\n- **Method:** POST\n- **URL:** `http://localhost:8080/api/v1/auth/institution-users/register/?project_id=dc42bc2d-bff2-4527-a134-0bc075bd20c6`\n- **Request Body:** Form-Data (No parameters provided)\n    \n\n### Response\n\n- **Status:** 201\n- **Content-Type:** application/json\n- **Body:**\n    \n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"image_url\": null,\n        \"phone\": \"\",\n        \"email\": \"\",\n        \"institution_id\": \"\",\n        \"otp\": null,\n        \"deletedAt\": null,\n        \"password\": null,\n        \"id\": \"\",\n        \"isActive\": true,\n        \"role\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\"\n    }\n}\n\n ```\n\n### Response Components\n\n- **`success`** **(boolean):** Indicates whether the registration was successful.\n- **`data`** **(object):** Contains details of the registered user, including:\n    - `firstName` (string): First name of the user.\n    - `lastName` (string): Last name of the user.\n    - `image_url` (string or null): URL of the user's image or null if not provided.\n    - `phone` (string): Phone number of the user.\n    - `email` (string): Email address of the user.\n    - `institution_id` (string): ID of the associated institution.\n    - `otp` (string or null): OTP (One-Time Password) or null if not provided.\n    - `deletedAt` (string or null): Timestamp of deletion or null if not deleted.\n    - `password` (string or null): User password or null if not provided.\n    - `id` (string): Unique identifier of the user.\n    - `isActive` (boolean): Indicates whether the user is active.\n    - `role` (string): Role of the user.\n    - `createdAt` (string): Timestamp of user creation.\n    - `updatedAt` (string): Timestamp of the last update.\n\n### Usage\n\n- **Endpoint:** `POST /api/v1/auth/institution-users/register/?project_id=dc42bc2d-bff2-4527-a134-0bc075bd20c6`"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "Nsanzimfura",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lastName",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "0780088171",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "nsanzimfura.com@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/educa/OneDrive/Pictures/Screenshots/Screenshot 2024-02-21 094348.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/e36a7f8f-b7be-44d2-88e1-1fe15319db58",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"e36a7f8f-b7be-44d2-88e1-1fe15319db58"
+							]
+						},
+						"description": "This HTTP PATCH request is used to update an institution user's information by their ID. The request should be sent to [http://localhost:8080/api/v1/auth/institution-users/:id](http://localhost:8080/api/v1/auth/institution-users/:id) with a form-data request body type. The request payload should include the fields to be updated.\n\n### Request Body\n\n- No specific request body parameters were provided.\n    \n\n### Response\n\nUpon successful execution, the server will respond with a status code of 200 and a JSON object in the response body. The response will include a \"success\" flag indicating the success of the operation, along with the updated user data in the \"data\" object. The \"data\" object includes various user details such as ID, first name, last name, email, image URL, institution ID, phone, active status, role, creation and update timestamps, and institution details.\n\nExample Response:\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"email\": \"\",\n        \"image_url\": \"\",\n        \"institution_id\": \"\",\n        \"phone\": \"\",\n        \"isActive\": true,\n        \"role\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"deletedAt\": null,\n        \"otp\": null,\n        \"institution\": {\n            \"id\": \"\",\n            \"name\": \"\",\n            \"logo\": \"\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Institution User Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"0780088171\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"login"
+							]
+						},
+						"description": "## Authenticate Institution User - Endpoint\n\nThis endpoint is used to authenticate institution users via phone number.\n\n### Request\n\n- **Method:** POST\n    \n- **URL:** `/api/v1/auth/institution-users/login`\n    \n- **Request Body:**\n    \n\n``` json\n{\n  \"phone\": \"**********\"\n}\n\n ```\n\n### Request Body Parameters\n\n- **`phone`** **(string, required):** The phone number of the user.\n    \n\n### Response\n\n- **`success`** **(boolean):** Indicates whether the authentication was successful.\n    \n- **`data`** **(boolean):** Indicates whether user data is available.\n    \n\n### Example\n\n#### Request\n\n``` json\n{\n  \"phone\": \"**********\"\n}\n\n ```\n\n#### Response\n\n``` json\n{\n  \"success\": true,\n  \"data\": true\n}\n\n ```\n\n### Usage\n\n- **Endpoint:** `POST /api/v1/auth/institution-users/login`"
+					},
+					"response": []
+				},
+				{
+					"name": "Institution User Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"otp\": \"14581\",\n    \"phone\": \"0780088171\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/otp/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"otp",
+								"verify"
+							]
+						},
+						"description": "\n### Verify OTP for Institution User\n\nThis endpoint allows you to verify the OTP (One Time Password) for an institution user.\n\n#### Request Body\n- `otp` (string, required): The OTP to be verified.\n- `phone` (string, required): The phone number for which the OTP is generated.\n\n#### Response\n- `success` (boolean): Indicates if the OTP verification was successful.\n- `message` (string): A message related to the OTP verification.\n- `data` (object): Contains details of the verified user.\n  - `id` (string): User ID.\n  - `firstName` (string): First name of the user.\n  - `lastName` (string): Last name of the user.\n  - `image_url` (string): URL of the user's image.\n  - `otp` (string): Verified OTP.\n  - `email` (string): Email of the user.\n  - `phone` (string): Phone number of the user.\n  - `institution_id` (string): ID of the institution to which the user belongs.\n  - `isActive` (boolean): Indicates if the user is active.\n  - `role` (string): Role of the user.\n  - `createdAt` (string): Timestamp of user creation.\n  - `updatedAt` (string): Timestamp of user details update.\n  - `deletedAt` (null): Indicates if the user is deleted.\n  - `password` (null): User's password.\n  - `token` (string): Authentication token for the user.\n\n#### Example\n```json\n{\n  \"otp\": \"123456\",\n  \"phone\": \"9876543210\"\n}\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"otp\": \"14581\",\n    \"phone\": \"0788478652\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/?project_id=ddef0a52-e626-4311-a435-cad871f9e333&take=1&skip=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								""
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "ddef0a52-e626-4311-a435-cad871f9e333"
+								},
+								{
+									"key": "take",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						},
+						"description": "## Get Institution Users - Endpoint\n\nThis endpoint retrieves institution users based on the provided project ID, with optional pagination parameters.\n\n### Request\n\n- **Method:** GET\n    \n- **URL:** `/api/v1/auth/institution-users/`\n    \n\n### Query Parameters\n\n- **`project_id`** **(string, required):** The ID of the project for which the institution users are being retrieved.\n    \n- **`take`** **(integer, optional):** The number of records to retrieve.\n    \n- **`skip`** **(integer, optional):** The number of records to skip.\n    \n\n### Request Body\n\n``` json\n{\n  \"otp\": \"\",\n  \"phone\": \"\"\n}\n\n ```\n\n### Request Body Parameters\n\n- **`otp`** **(string):** The OTP for additional user verification.\n    \n- **`phone`** **(string):** The phone number for additional user verification.\n    \n\n### Response\n\n- **Status:** 200 OK\n    \n- **Content-Type:** application/json\n    \n\n### Response Body\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"rows\": [\n      {\n        \"id\": \"user_entry_id\",\n        \"user_id\": \"user_id\",\n        \"project_id\": \"project_id\",\n        \"isActive\": true,\n        \"createdAt\": \"2022-02-15T12:00:00Z\",\n        \"updatedAt\": \"2022-02-15T14:30:00Z\",\n        \"user\": {\n          \"id\": \"user_id\",\n          \"firstName\": \"John\",\n          \"lastName\": \"Doe\",\n          \"image_url\": \"https://example.com/avatar.jpg\",\n          \"otp\": null,\n          \"email\": \"john.doe@example.com\",\n          \"phone\": \"9876543210\",\n          \"institution_id\": \"institution_id\",\n          \"isActive\": true,\n          \"role\": \"user\",\n          \"createdAt\": \"2022-02-15T12:00:00Z\",\n          \"updatedAt\": \"2022-02-15T14:30:00Z\",\n          \"deletedAt\": null,\n          \"password\": null,\n          \"institution\": {\n            \"id\": \"institution_id\",\n            \"name\": \"Example Institution\",\n            \"email\": \"info@example-institution.com\",\n            \"logo\": \"https://example.com/logo.jpg\",\n            \"address\": \"123 Main St, City\",\n            \"category_id\": \"category_id\",\n            \"category_name\": \"Education\",\n            \"isActive\": true,\n            \"phone\": \"9876543210\",\n            \"createdAt\": \"2022-02-15T12:00:00Z\",\n            \"updatedAt\": \"2022-02-15T14:30:00Z\",\n            \"deletedAt\": null\n          }\n        }\n      }\n    ],\n    \"totalCount\": 1,\n    \"totalPages\": 1,\n    \"currentPage\": 1\n  }\n}\n\n ```\n\n### Usage\n\n- **Endpoint:** `GET /api/v1/auth/institution-users/`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/e36a7f8f-b7be-44d2-88e1-1fe15319db58",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"e36a7f8f-b7be-44d2-88e1-1fe15319db58"
+							]
+						},
+						"description": "\nThis API endpoint sends an HTTP GET request to retrieve information about a specific institution user identified by the provided ID.\n\n### Request\n\n- Method: GET\n- URL: `http://localhost:8080/api/v1/auth/institution-users/:id`\n\n### Response\n\nUpon a successful execution, the API returns a JSON object with the following properties:\n\n- `success` (boolean): Indicates whether the request was successful.\n- `data` (object): Contains details about the institution user, including the following attributes:\n  - `id` (string): The unique identifier of the user.\n  - `firstName` (string): The first name of the user.\n  - `lastName` (string): The last name of the user.\n  - `email` (string): The email address of the user.\n  - `image_url` (string): The URL of the user's image.\n  - `institution_id` (string): The ID of the institution associated with the user.\n  - `phone` (string): The phone number of the user.\n  - `isActive` (boolean): Indicates whether the user account is active.\n  - `role` (string): The role of the user.\n  - `createdAt` (string): The timestamp when the user account was created.\n  - `updatedAt` (string): The timestamp when the user account was last updated.\n  - `deletedAt` (string): The timestamp when the user account was deleted (null if not deleted).\n  - `otp` (string): The one-time password associated with the user (null if not set).\n  - `institution` (object): Contains details about the institution associated with the user, including the following attributes:\n    - `id` (string): The unique identifier of the institution.\n    - `name` (string): The name of the institution.\n    - `logo` (string): The URL of the institution's logo.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "List User Projects",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/:id/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								":id",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6bbb95e0-32eb-438f-8e4f-861bc2f5469e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "cfc60e9e-f05e-4106-aad4-25a4240d41cc"
+								}
+							]
+						},
+						"description": "## Delete Institution User - Endpoint\n\nThis API endpoint is used to delete a specific institution user.\n\n### Request\n\n- **Method:** DELETE\n    \n- **URL:** `/api/v1/auth/institution-users/:id`\n    \n\n### Path Parameters\n\n- **`:id`** **(string, required):** The unique identifier of the institution user to be deleted.\n    \n\n### Response\n\nUpon successful execution, the server responds with a status code of 204 and a content type of text/xml.\n\n### Example\n\n- **Request:**\n    \n\n``` json\nDELETE /api/v1/auth/institution-users/user_id\n\n ```\n\n- **Response:**\n    \n\n```\nStatus: 204\nContent-Type: text/xml\n\n ```\n\n### Usage\n\n- **Endpoint:** `DELETE /api/v1/auth/institution-users/:id`\n    \n- **Path Parameters:**\n    \n    - `:id` (string, required): The unique identifier of the institution user to be deleted."
+					},
+					"response": []
+				},
+				{
+					"name": "Restore User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"0788478652\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/institution-users/restore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"institution-users",
+								"restore"
+							]
+						},
+						"description": "## Patch Institution User Restore - Endpoint\n\nThis API endpoint is used to restore an institution user using a PATCH request.\n\n### Request\n\n- **Method:** PATCH\n    \n- **URL:** `/api/v1/auth/institution-users/restore`\n    \n\n### Request Body\n\nThe request body should include the following parameter:\n\n- **`phone`** **(string, required):** The phone number of the user to be restored.\n    \n\n### Response\n\nUpon successful execution, the server responds with a status code of 200 and a content type of application/json.\n\n### Example\n\n- **Request:**\n    \n\n``` json\nPATCH /api/v1/auth/institution-users/restore\n\n ```\n\n- **Request Body:**\n    \n\n``` json\n{\n  \"phone\": \"user_phone_number\"\n}\n\n ```\n\n- **Response:**\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"image_url\": \"\",\n    \"otp\": null,\n    \"email\": \"\",\n    \"phone\": \"\",\n    \"institution_id\": \"\",\n    \"isActive\": true,\n    \"role\": \"\",\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"deletedAt\": null,\n    \"password\": null\n  }\n}\n\n ```\n\n### Usage\n\n- **Endpoint:** `PATCH /api/v1/auth/institution-users/restore`\n    \n- **Request Body:**\n    \n    - `phone` (string, required): The phone number of the user to be restored."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
